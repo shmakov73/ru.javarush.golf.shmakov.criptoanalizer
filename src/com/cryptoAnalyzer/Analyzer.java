@@ -4,9 +4,9 @@ public class Analyzer {
     static String stringAlphaBet = "АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя.,”:-!? ";
     public static char[] alphaBet = stringAlphaBet.toCharArray();
 
-    public static int letterCount(StringBuilder text, char symbol){
+    public static int letterCount(String text, char symbol){
         int c = 0;
-        char[] ch = text.toString().toCharArray();
+        char[] ch = text.toCharArray();
         for (int i = 0; i < text.length(); i++) {
             if (ch[i] == symbol) {
                 c++;
@@ -15,8 +15,8 @@ public class Analyzer {
         return c;
     }
 
-    public static String encrypt(String stringMessage, int cryptoKey){
-        char[] message = stringMessage.toCharArray();
+    public static String encrypt(StringBuilder stringMessage, int cryptoKey){
+        char[] message = stringMessage.toString().toCharArray();
         char[] result = new char[message.length];
         for (int i = 0; i < message.length; i++) {
             for (int j = 0; j < alphaBet.length; j++) {
@@ -29,8 +29,8 @@ public class Analyzer {
 
     }
 
-    public static String decrypt(String encryptedText, int cryptoKey){
-        char[] text = encryptedText.toCharArray();
+    public static String decrypt(StringBuilder encryptedText, int cryptoKey){
+        char[] text = encryptedText.toString().toCharArray();
         char[] result = new char[text.length];
         for (int i = 0; i < text.length; i++) {
             for (int j = 0; j < alphaBet.length; j++) {
