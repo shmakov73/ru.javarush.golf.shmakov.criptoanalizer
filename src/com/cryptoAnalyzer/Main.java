@@ -11,9 +11,10 @@ public class Main {
         System.out.println("1. Шифрование текста методом Цезаря");
         System.out.println("2. Расшифровка текста методом Цезаря");
         System.out.println("3. Поиск ключа к зашифрованному тексту");
+        System.out.println("4. Выход");
 
         Scanner console = new Scanner(System.in);
-        if (console.hasNextInt()){
+        while (console.hasNextInt()){
             int answer = console.nextInt();
             if (answer == 1){
                 Scanner scanner = new Scanner(System.in);
@@ -25,6 +26,7 @@ public class Main {
                 int key = scanner.nextInt();
                 encryptText(input, output, key);
                 System.out.println("Зашифрованный текст сохранён в файл: " + output);
+                break;
             }
             if (answer == 2){
                 Scanner scanner = new Scanner(System.in);
@@ -36,13 +38,16 @@ public class Main {
                 int key = scanner.nextInt();
                 decryptText(input, output, key);
                 System.out.println("Расшифрованный текст сохранён в файл: " + output);
+                break;
             }
             if (answer == 3){
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("Введите адрес файла:");
                 String input = scanner.nextLine();
                 System.out.println("Ключ к зашифрованному тексту: " + bruteForce(input));
+                break;
             }
+            if (answer == 4) break;
         }
 
 
