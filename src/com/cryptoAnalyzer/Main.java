@@ -5,51 +5,49 @@ import java.util.Scanner;
 
 public class Main {
 
+    private static final String INPUT = "Введите адрес файла:";
+    private static final String OUTPUT = "Зашифрованный текст сохранён в файл: ";
+    private static final String ENTER_KEY = "Введите ключ шифрования:";
+
     public static void main(String[] args) {
 
-        System.out.println("Выберите действие:");
-        System.out.println("1. Шифрование текста методом Цезаря");
-        System.out.println("2. Расшифровка текста методом Цезаря");
-        System.out.println("3. Поиск ключа к зашифрованному тексту");
-        System.out.println("4. Выход");
+        print("Выберите действие:");
+        print("1. Шифрование текста методом Цезаря");
+        print("2. Расшифровка текста методом Цезаря");
+        print("3. Поиск ключа к зашифрованному тексту");
+        print("4. Выход");
 
         Scanner console = new Scanner(System.in);
         while (console.hasNextInt()){
             int answer = console.nextInt();
             if (answer == 1){
                 Scanner scanner = new Scanner(System.in);
-                System.out.println("Введите адрес файла:");
+                print(INPUT);
                 String input = scanner.nextLine();
-                System.out.println("Введите адрес для сохранения зашифрованного текста:");
-                String output = scanner.nextLine();
-                System.out.println("Введите ключ шифрования:");
+                String output = outputFile(input, "\\encryptedFile.txt");
+                print(ENTER_KEY);
                 int key = scanner.nextInt();
                 encryptText(input, output, key);
-                System.out.println("Зашифрованный текст сохранён в файл: " + output);
-                break;
+                print(OUTPUT + output);
             }
             if (answer == 2){
                 Scanner scanner = new Scanner(System.in);
-                System.out.println("Введите адрес файла:");
+                print(INPUT);
                 String input = scanner.nextLine();
-                System.out.println("Введите адрес для сохранения расшифрованного текста:");
-                String output = scanner.nextLine();
-                System.out.println("Введите ключ шифрования:");
+                String output = outputFile(input, "\\decryptedFile.txt");
+                print(ENTER_KEY);
                 int key = scanner.nextInt();
                 decryptText(input, output, key);
-                System.out.println("Расшифрованный текст сохранён в файл: " + output);
-                break;
+                print("Расшифрованный текст сохранён в файл: " + output);
             }
             if (answer == 3){
                 Scanner scanner = new Scanner(System.in);
-                System.out.println("Введите адрес файла:");
+                print(INPUT);
                 String input = scanner.nextLine();
-                System.out.println("Ключ к зашифрованному тексту: " + bruteForce(input));
-                break;
+                print("Ключ к зашифрованному тексту: " + bruteForce(input));
             }
             if (answer == 4) break;
         }
-
 
 
 //********************************** Это для проверки работоспособности кода ******************************************
@@ -64,6 +62,17 @@ public class Main {
 //*********************************************************************************************************************
 
     }
+    public static void print(String text){ //метод для вывода в консоль
+        System.out.println(text);
+    }
+
+
+    public static String outputFile(String input, String output){ // создание адреса файла для сохранения
+        File file = new File(input);
+        File out = new File(file.getAbsoluteFile().getParentFile() + output);
+        return String.valueOf(out);
+    }
+
 
     //*************************** Зашифровка текста ********************************
     public static void encryptText(String inputFile, String outputFile, int key){
@@ -114,9 +123,9 @@ public class Main {
         // взята из Википедии.
         for (key = 0; key < aLength; key++) {
             String s = Analyzer.decrypt(string, key);
-            if ((Analyzer.letterCount(s, 'е') > Analyzer.letterCount(s, 'и') &
-                    Analyzer.letterCount(s, 'и') > Analyzer.letterCount(s, 'с') &
-                    Analyzer.letterCount(s, 'с') > Analyzer.letterCount(s, 'у') &
+            if ((Analyzer.letterCount(s, 'е') > Analyzer.letterCount(s, 'и') &&
+                    Analyzer.letterCount(s, 'и') > Analyzer.letterCount(s, 'с') &&
+                    Analyzer.letterCount(s, 'с') > Analyzer.letterCount(s, 'у') &&
                     Analyzer.letterCount(s, 'у') > Analyzer.letterCount(s, 'ф'))){
                 break;
             }
